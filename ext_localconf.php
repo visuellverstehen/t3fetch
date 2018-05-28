@@ -5,5 +5,5 @@ if (!defined('TYPO3_MODE')) {
 }
 
 if (TYPO3_MODE === 'BE') {
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = \VV\T3crawler\Command\FetchWebsiteCommandController::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = \VV\T3fetch\Command\FetchWebsiteCommandController::class;
 }

@@ -14,7 +14,7 @@ class FetchWebsiteCommandController extends CommandController
         $fetchDirectory = PATH_site . 'typo3temp/t3fetch';
 
         // Remove fetch directory
-        $this->exec('rm -r ' . $fetchDirectory);
+        $this->exec('rm -r -f ' . $fetchDirectory);
 
         // Create fetch directory
         $this->exec('mkdir ' . $fetchDirectory);

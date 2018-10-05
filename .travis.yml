@@ -21,5 +21,5 @@ jobs:
             composer extension-release
             # Upload
             echo "Uploading release ${TRAVIS_TAG} to TER"
-            /home/travis/.composer/vendor/bin/ter-client upload t3fetch . -u "$TYPO3_ORG_USERNAME" -p "$TYPO3_ORG_PASSWORD" -m "$TAG_MESSAGE"
+            /home/travis/.config/composer/vendor/bin/ter-client upload t3fetch . -u "$TYPO3_ORG_USERNAME" -p "$TYPO3_ORG_PASSWORD" -m "$TAG_MESSAGE"
           fi;

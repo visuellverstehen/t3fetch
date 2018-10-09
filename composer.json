@@ -2,7 +2,7 @@
     "name": "visuellverstehen/t3fetch",
     "type": "typo3-cms-extension",
     "description": "Fetches a website (including all subpages), so the TYPO3 cache gets filled.",
-    "license": [],
+    "license": "MIT",
     "authors": [
         {
             "name": "visuellverstehen",

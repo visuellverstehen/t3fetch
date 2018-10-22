@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/visuellverstehen/t3fetch.svg)](https://travis-ci.org/visuellverstehen/t3fetch)
+[![Downloads](https://img.shields.io/packagist/dt/visuellverstehen/t3fetch.svg)](https://packagist.org/packages/visuellverstehen/t3fetch)
 
 # t3fetch
 Fetches a website (including all subpages), so the TYPO3 cache gets filled.

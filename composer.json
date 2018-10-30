@@ -10,12 +10,6 @@
             "homepage": "https://www.visuellverstehen.de"
         }
     ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://composer.typo3.org/"
-        }
-    ],
     "require": {
         "typo3/cms-core": "8.7 - 9.5",
         "php": "^7.1.0"

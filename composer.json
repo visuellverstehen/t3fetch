@@ -22,7 +22,6 @@
     "scripts": {
         "extension-release": [
             "rm .gitignore",
-            "rm .travis.yml",
             "rm -rf .git",
             "rm -rf typo3",
             "rm -rf vendor"

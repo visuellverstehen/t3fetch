@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/visuellverstehen/t3fetch.svg)](https://travis-ci.org/visuellverstehen/t3fetch)
+[![Actions](https://github.com/visuellverstehen/t3fetch/workflows/TER/badge.svg)](https://github.com/visuellverstehen/t3fetch/actions)
 [![Downloads](https://img.shields.io/packagist/dt/visuellverstehen/t3fetch.svg)](https://packagist.org/packages/visuellverstehen/t3fetch)
 
 # t3fetch

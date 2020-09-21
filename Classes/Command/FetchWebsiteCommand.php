@@ -39,6 +39,6 @@ class FetchWebsiteCommand extends Command
         exec('mkdir ' . $fetchDirectory);
 
         // Fetch website recursively
-        exec('wget -q -r ' . $input->getArgument('baseUrl') . ' -P ' . $fetchDirectory);
+        exec('wget --delete-after -q -r ' . $input->getArgument('baseUrl') . ' -P ' . $fetchDirectory);
     }
 }

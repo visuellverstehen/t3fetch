@@ -10,6 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FetchWebsiteCommand extends Command
 {
+    // File extensions to reject
+    const REJECT = 'mp4,mov,pdf,jpg,png';
+
     /**
      * Configure the command by defining the name, options and arguments
      */
@@ -39,6 +42,8 @@ class FetchWebsiteCommand extends Command
         exec('mkdir ' . $fetchDirectory);
 
         // Fetch website recursively
-        exec('wget -q -r ' . $input->getArgument('baseUrl') . ' -P ' . $fetchDirectory);
+        exec('wget --delete-after -q -r ' . $input->getArgument('baseUrl') . ' -R "' . self::REJECT . '" -P ' . $fetchDirectory, $output, $status);
+
+        return $status;
     }
 }

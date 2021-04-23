@@ -39,7 +39,7 @@ class FetchWebsiteCommand extends Command
         exec('rm -rf ' . $fetchDirectory);
 
         // Create fetch directory
-        exec('mkdir ' . $fetchDirectory);
+        exec('mkdir -p ' . $fetchDirectory);
 
         // Fetch website recursively
         exec('wget --delete-after -q -r ' . $input->getArgument('baseUrl') . ' -R "' . self::REJECT . '" -P ' . $fetchDirectory, $output, $status);

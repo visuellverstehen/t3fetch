@@ -1,0 +1,4 @@
+services:
+  VV\T3fetch\Command\FetchWebsiteCommand:
+    tags:
+      - { name: 'console.command', command: 'fetchWebsite:fetchAll', description: 'Fetches the website and warms up the cache' }

@@ -11,20 +11,12 @@
         }
     ],
     "require": {
-        "typo3/cms-core": "8.7 - 10.4",
-        "php": "^7.1.0"
+        "typo3/cms-core": "8.7 - 11.5",
+        "php": "^7.1 || ^8.0"
     },
     "autoload": {
         "psr-4": {
             "VV\\T3fetch\\": "Classes/"
         }
-    },
-    "scripts": {
-        "extension-release": [
-            "rm .gitignore",
-            "rm -rf .git",
-            "rm -rf typo3",
-            "rm -rf vendor"
-        ]
     }
 }

@@ -6,6 +6,7 @@ use TYPO3\CMS\Core\Core\Environment;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class FetchWebsiteCommand extends Command
@@ -24,7 +25,14 @@ class FetchWebsiteCommand extends Command
                 'baseUrl',
                 InputArgument::REQUIRED,
                 'The base url.'
-            );;
+            )
+            ->addOption(
+                'limit',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'The value for wget --limit-rate parameter.',
+                '1000k'
+            );
     }
 
     /**
@@ -42,7 +50,7 @@ class FetchWebsiteCommand extends Command
         exec('mkdir -p ' . $fetchDirectory);
 
         // Fetch website recursively
-        exec('wget --delete-after -q -r ' . $input->getArgument('baseUrl') . ' -R "' . self::REJECT . '" -P ' . $fetchDirectory, $output, $status);
+        exec('wget --delete-after -q -r ' . $input->getArgument('baseUrl') . ' --limit-rate ' . $this->getOption('limit') . ' -R "' . self::REJECT . '" -P ' . $fetchDirectory, $output, $status);
 
         return $status;
     }

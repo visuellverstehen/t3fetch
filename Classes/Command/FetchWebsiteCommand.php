@@ -50,7 +50,7 @@ class FetchWebsiteCommand extends Command
         exec('mkdir -p ' . $fetchDirectory);
 
         // Fetch website recursively
-        exec('wget --delete-after -q -r ' . $input->getArgument('baseUrl') . ' --limit-rate ' . $this->getOption('limit') . ' -R "' . self::REJECT . '" -P ' . $fetchDirectory, $output, $status);
+        exec('wget --delete-after -q -r ' . $input->getArgument('baseUrl') . ' --limit-rate ' . $input->getOption('limit') . ' -R "' . self::REJECT . '" -P ' . $fetchDirectory, $output, $status);
 
         return $status;
     }

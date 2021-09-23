@@ -18,5 +18,10 @@
         "psr-4": {
             "VV\\T3fetch\\": "Classes/"
         }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "t3fetch"
+        }
     }
 }

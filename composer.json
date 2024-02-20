@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "typo3/cms-core": "8.7 - 12.4",
+        "typo3/cms-core": "10.0 - 12.4",
         "php": "^7.1 || ^8.0"
     },
     "autoload": {

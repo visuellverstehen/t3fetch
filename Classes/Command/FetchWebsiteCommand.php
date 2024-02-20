@@ -3,20 +3,21 @@
 namespace VV\T3fetch\Command;
 
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TYPO3\CMS\Core\Http\RequestFactory;
 
+/**
+ * Inspired by https://github.com/schliesser/sitecrawler/
+ */
 class FetchWebsiteCommand extends Command
 {
-    // File extensions to reject
-    const REJECT = 'mp4,mov,pdf,jpg,png';
+    protected array $urls = [];
 
-    /**
-     * Configure the command by defining the name, options and arguments
-     */
     protected function configure()
     {
         $this
@@ -24,34 +25,57 @@ class FetchWebsiteCommand extends Command
             ->addArgument(
                 'baseUrl',
                 InputArgument::REQUIRED,
-                'The base url.'
-            )
-            ->addOption(
-                'limit',
-                null,
-                InputOption::VALUE_REQUIRED,
-                'The value for wget --limit-rate parameter.',
-                '1000k'
+                'The absolute url pointing to the sitemap.'
             );
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $fetchDirectory = Environment::getPublicPath() . '/typo3temp/t3fetch';
+        if (GeneralUtility::isValidUrl($input->getArgument('baseUrl')) === false ||
+            strpos($input->getArgument('baseUrl'), 'sitemap.xml') === false
+        ) {
+            return Command::FAILURE;
+        }
 
-        // Remove fetch directory
-        exec('rm -rf ' . $fetchDirectory);
+        $this->processSitemap($input->getArgument('baseUrl'));
+        $this->processUrls();
 
-        // Create fetch directory
-        exec('mkdir -p ' . $fetchDirectory);
+        return Command::SUCCESS;
+    }
 
-        // Fetch website recursively
-        exec('wget --delete-after -q -r ' . $input->getArgument('baseUrl') . ' --limit-rate ' . $input->getOption('limit') . ' -R "' . self::REJECT . '" -P ' . $fetchDirectory, $output, $status);
+    protected function processSitemap(string $url): void
+    {
+        if (GeneralUtility::isValidUrl($url) === false ||
+            strpos($url, 'sitemap.xml') === false
+        ) {
+            throw new Exception("Error Processing Request", 1);
+        }
 
-        return $status;
+        $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
+        $response = $requestFactory->request($url, 'GET');
+        $xml = simplexml_load_string($response->getBody()->getContents());
+        $sitemap = json_decode(json_encode($xml), true) ?: [];
+
+        if (array_key_exists('sitemap', $sitemap)) {
+            foreach ($sitemap['sitemap'] as $item) {
+                $this->processSitemap($item['loc']);
+            }
+        }
+
+        if (array_key_exists('url', $sitemap)) {
+            $this->urls += array_map(fn ($item) => $item['loc'], $sitemap['url']);
+        }
+    }
+
+    protected function processUrls(): void
+    {
+        array_walk(array_unique($this->urls), function($url) {
+            GeneralUtility::makeInstance(RequestFactory::class)
+                ->request($url, 'HEAD', [
+                    'headers' => [
+                        'User-Agent' => 't3fetch crawler',
+                    ]
+                ]);
+        });
     }
 }

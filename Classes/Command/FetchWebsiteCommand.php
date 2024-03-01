@@ -48,7 +48,7 @@ class FetchWebsiteCommand extends Command
         if (GeneralUtility::isValidUrl($url) === false ||
             strpos($url, 'sitemap.xml') === false
         ) {
-            throw new Exception("Error Processing Request", 1);
+            throw new \Exception("Error Processing Request", 1);
         }
 
         $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);

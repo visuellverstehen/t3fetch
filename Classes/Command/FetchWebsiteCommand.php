@@ -46,9 +46,9 @@ class FetchWebsiteCommand extends Command
     protected function processSitemap(string $url): void
     {
         if (GeneralUtility::isValidUrl($url) === false ||
-            strpos($url, 'sitemap.xml') === false
+            (strpos($url, 'sitemap.xml') === false && strpos($url, '1533906435') === false)
         ) {
-            throw new \Exception("Error Processing Request", 1);
+            throw new \Exception('URL ' . $url . ' is not valid');
         }
 
         $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);

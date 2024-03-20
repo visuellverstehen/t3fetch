@@ -32,7 +32,7 @@ class FetchWebsiteCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (GeneralUtility::isValidUrl($input->getArgument('baseUrl')) === false ||
-            strpos($input->getArgument('baseUrl'), 'sitemap.xml') === false
+            (strpos($input->getArgument('baseUrl'), 'sitemap.xml') === false && strpos($input->getArgument('baseUrl'), '1533906435') === false)
         ) {
             return Command::FAILURE;
         }

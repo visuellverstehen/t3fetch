@@ -63,7 +63,7 @@ class FetchWebsiteCommand extends Command
         }
 
         if (array_key_exists('url', $sitemap)) {
-            $this->urls += array_map(fn ($item) => $item['loc'], $sitemap['url']);
+            $this->urls = array_merge($this->urls, array_map(fn ($item) => $item['loc'], $sitemap['url']));
         }
     }
 

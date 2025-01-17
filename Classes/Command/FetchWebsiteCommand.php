@@ -39,7 +39,7 @@ class FetchWebsiteCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $fetchDirectory = Environment::getPublicPath() . '/typo3temp/t3fetch';
 

@@ -5,14 +5,14 @@ $EM_CONF[$_EXTKEY] = [
     'description' => 'Fetches a website (including all subpages), so the TYPO3 cache gets filled.',
     'category' => 'be',
     'author' => 'visuellverstehen',
-    'author_email' => 'kontakt@visuellverstehen.de',
+    'author_email' => 'hello@visuellverstehen.de',
     'author_company' => 'visuellverstehen',
     'state' => 'stable',
     'clearCacheOnLoad' => false,
-    'version' => '1.5.0',
+    'version' => '1.6.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.0.0-12.4.99',
+            'typo3' => '10.0.0-13.4.99',
         ]
     ]
 ];
